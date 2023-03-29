@@ -7,10 +7,10 @@ using namespace pronto::quadruped;
 bool ForceSensorStanceEstimator::getStance(LegBoolMap& stance,
                                            LegScalarMap& stance_probability) {
 
-  stance[LF] = grf_[LF](2) > force_threshold_;
-  stance[RF] = grf_[RF](2) > force_threshold_;
-  stance[LH] = grf_[LH](2) > force_threshold_;
-  stance[RH] = grf_[RH](2) > force_threshold_;
+  stance[LF] = grf_[LF].norm() > force_threshold_;
+  stance[RF] = grf_[RF].norm() > force_threshold_;
+  stance[LH] = grf_[LH].norm() > force_threshold_;
+  stance[RH] = grf_[RH].norm() > force_threshold_;
 
   stance_probability[LF] = static_cast<double>(stance[LF]);
   stance_probability[RF] = static_cast<double>(stance[RF]);

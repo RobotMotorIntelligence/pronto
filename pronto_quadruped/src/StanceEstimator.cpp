@@ -200,7 +200,7 @@ bool StanceEstimator::getStance(LegBoolMap &stance,
 
         switch(mode_) {
         case Mode::THRESHOLD:
-            stance[leg_id] = grf_[leg_id](Z) > force_threshold_ ? true : false;
+            stance[leg_id] = grf_[leg_id].norm() > force_threshold_ ? true : false;
             stance_probability[leg_id] = stance[leg_id];
             break;
         case Mode::HYSTERESIS:
