@@ -29,6 +29,11 @@ ROSFrontEnd::ROSFrontEnd(ros::NodeHandle& nh, bool verbose) :
                 twist_pub_ = nh_.advertise<geometry_msgs::TwistWithCovarianceStamped>(twist_topic, 200);
                 twist_msg_.header.frame_id = twist_frame_id;
             }
+            std::string odometry_topic = "ODOMETRY_BODY";
+            if(nh_.getParam("odometry_topic", odometry_topic)){
+                odometry_pub_ = nh_.advertise<nav_msgs::Odometry>(odometry_topic, 200);
+                odometry_msg_.header.frame_id = pose_frame_id; //TODO: as a param ?
+            }
             // try to
             if(!nh_.getParam("publish_tf", publish_tf_)){
                 ROS_WARN("Couldn't get param \"publish_tf\". Not publishing TF.");
